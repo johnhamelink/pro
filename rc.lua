@@ -61,12 +61,8 @@ tmux          = "termite -e tmux"
 termax        = "termite --geometry 1680x1034+0+22"
 rootterm      = "sudo -i termite"
 ncmpcpp       = "urxvt -geometry 254x60+80+60 -e ncmpcpp"
-newsbeuter    = "urxvt -g 210x50+50+50 -e newsbeuter"
-browser       = "firefox"
-filemanager   = "spacefm"
 browser       = "google-chrome"
 en_uk         = "setxkbmap -layout 'us,ua' -variant 'winkeys' -option 'grp:caps_toggle,grp_led:caps,compose:menu' &"
-en_ru         = "setxkbmap -layout 'us,ru' -variant 'winkeys' -option 'grp:caps_toggle,grp_led:caps,compose:menu' &"
 configuration = termax .. ' -e "vim -O $HOME/.config/awesome/rc.lua $HOME/.config/awesome/themes/' ..theme.. '/theme.lua"'
 
 -- | Table of layouts | --
@@ -727,9 +723,4 @@ end
 
 -- | Autostart | --
 
-os.execute("pkill compton")
-os.execute("setxkbmap -layout 'us,ua' -variant 'winkeys' -option 'grp:caps_toggle,grp_led:caps,compose:menu' &")
-run_once("parcellite")
-run_once("kbdd")
--- run_once("compton")
 
