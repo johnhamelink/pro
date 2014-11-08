@@ -8,6 +8,7 @@ local vicious    = require("vicious")
 local naughty    = require("naughty")
 local lain       = require("lain")
 local cyclefocus = require('cyclefocus')
+local menubar    = require("menubar")
 
 -- | Theme | --
 
@@ -491,8 +492,6 @@ root.buttons(awful.util.table.join(
 globalkeys = awful.util.table.join(
 
     awful.key({ modkey,           }, "w",      function () mainmenu:show() end),
-    awful.key({ modkey,           }, "Escape", function () exec("/usr/local/sbin/zaprat --toggle") end),
-    awful.key({ modkey            }, "r",      function () mypromptbox[mouse.screen]:run() end),
     awful.key({ modkey,           }, "j",
         function ()
             awful.client.focus.byidx( 1)
@@ -531,29 +530,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "u",      function () exec("urxvt -geometry 254x60+80+60") end),
     awful.key({ modkey,           }, "s",      function () exec(filemanager) end),
     awful.key({ modkey            }, "g",      function () exec("gvim") end),
-    awful.key({ modkey            }, "Print",  function () exec("screengrab") end),
-    awful.key({ modkey, "Control" }, "Print",  function () exec("screengrab --region") end),
-    awful.key({ modkey, "Shift"   }, "Print",  function () exec("screengrab --active") end),
-    awful.key({ modkey            }, "7",      function () exec("firefox") end),
-    awful.key({ modkey            }, "8",      function () exec("chromium") end),
-    awful.key({ modkey            }, "9",      function () exec("dwb") end),
-    awful.key({ modkey            }, "0",      function () exec("thunderbird") end),
-    awful.key({ modkey            }, "'",      function () exec("leafpad") end),
-    awful.key({ modkey            }, "\\",     function () exec("sublime_text") end),
-    awful.key({ modkey            }, "i",      function () exec("gcolor2") end),
-    awful.key({ modkey            }, "`",      function () exec("xwinmosaic") end),
     awful.key({ modkey, "Control" }, "m",      function () shexec(ncmpcpp) end),
-    awful.key({ modkey, "Control" }, "f",      function () shexec(newsbeuter) end),
-    awful.key({ modkey            }, "F5",     function () exec(en_uk) end),
-    awful.key({ modkey            }, "F6",     function () exec(en_ru) end),
-    awful.key({ modkey            }, "Pause",  function () exec("VirtualBox --startvm 'a8d5ac56-b0d2-4f7f-85be-20666d2f46df'") end)
-    -- awful.key({ modkey }, "x",
-    --           function ()
-    --               awful.prompt.run({ prompt = "Run Lua code: " },
-    --               mypromptbox[mouse.screen].widget,
-    --               awful.util.eval, nil,
-    --               awful.util.getdir("cache") .. "/history_eval")
-    --           end)
 )
 
 clientkeys = awful.util.table.join(
