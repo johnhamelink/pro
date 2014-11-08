@@ -523,6 +523,8 @@ globalkeys = awful.util.table.join(
     awful.key({}, "XF86AudioPrev", function() awful.util.spawn("mpc prev") end),
     awful.key({}, "XF86AudioNext", function() awful.util.spawn("mpc next") end),
 
+    awful.key({ modkey }, "p", function() menubar.show() end),
+
     cyclefocus.key({ "Mod1", }, "Tab", 1, {
         cycle_filters = { cyclefocus.filters.same_screen, cyclefocus.filters.common_tag },
         keys = {'Tab', 'ISO_Left_Tab'}
