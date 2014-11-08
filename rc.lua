@@ -80,18 +80,18 @@ local layouts =
 
 -- | Wallpaper | --
 
-if beautiful.wallpaper then
-    for s = 1, screen.count() do
-        gears.wallpaper.tiled(beautiful.wallpaper, s)
-        -- gears.wallpaper.maximized(beautiful.wallpaper, s, true)
-    end
-end
+-- if beautiful.wallpaper then
+--     for s = 1, screen.count() do
+--         gears.wallpaper.tiled(beautiful.wallpaper, s)
+--         -- gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+--     end
+-- end
 
 -- | Tags | --
 
 tags = {}
 for s = 1, screen.count() do
-    tags[s] = awful.tag({ "  ", "  ", "  ", "  ", "  " }, s, layouts[1])
+    tags[s] = awful.tag({ "  ", "  ", "  ", "  ", "  " }, s, layouts[2])
 end
 
 -- | Menu | --
