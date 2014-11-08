@@ -63,6 +63,7 @@ termax        = "termite --geometry 1680x1034+0+22"
 rootterm      = "sudo -i termite"
 ncmpcpp       = "urxvt -geometry 254x60+80+60 -e ncmpcpp"
 browser       = "google-chrome"
+filemanager   = "thunar"
 en_uk         = "setxkbmap -layout 'us,ua' -variant 'winkeys' -option 'grp:caps_toggle,grp_led:caps,compose:menu' &"
 configuration = termax .. ' -e "vim -O $HOME/.config/awesome/rc.lua $HOME/.config/awesome/themes/' ..theme.. '/theme.lua"'
 
