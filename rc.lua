@@ -542,9 +542,20 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "s",      function () exec(filemanager) end),
     awful.key({ modkey            }, "g",      function () exec("gvim") end),
     awful.key({ modkey, "Control" }, "m",      function () shexec(ncmpcpp) end),
+    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
+    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end)
 )
 
 clientkeys = awful.util.table.join(
+    --- Toggle screen focus
+    awful.key({ modkey,           }, "`",      function ()  awful.screen.focus_relative(1) end),
+    --- Cycle client through screens
+    awful.key({ modkey, "Shift"   }, "`",      awful.client.movetoscreen                        ),
+    awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
+    awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
+    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
+    awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
+    awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
     awful.key({ modkey            }, "Next",   function () awful.client.moveresize( 20,  20, -40, -40) end),
     awful.key({ modkey            }, "Prior",  function () awful.client.moveresize(-20, -20,  40,  40) end),
     awful.key({ modkey            }, "Down",   function () awful.client.moveresize(  0,  20,   0,   0) end),
