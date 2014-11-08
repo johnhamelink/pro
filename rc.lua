@@ -64,6 +64,7 @@ ncmpcpp       = "urxvt -geometry 254x60+80+60 -e ncmpcpp"
 newsbeuter    = "urxvt -g 210x50+50+50 -e newsbeuter"
 browser       = "firefox"
 filemanager   = "spacefm"
+browser       = "google-chrome"
 en_uk         = "setxkbmap -layout 'us,ua' -variant 'winkeys' -option 'grp:caps_toggle,grp_led:caps,compose:menu' &"
 en_ru         = "setxkbmap -layout 'us,ru' -variant 'winkeys' -option 'grp:caps_toggle,grp_led:caps,compose:menu' &"
 configuration = termax .. ' -e "vim -O $HOME/.config/awesome/rc.lua $HOME/.config/awesome/themes/' ..theme.. '/theme.lua"'
