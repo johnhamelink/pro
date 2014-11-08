@@ -78,15 +78,6 @@ local layouts =
     awful.layout.suit.tile.top
 }
 
--- | Wallpaper | --
-
--- if beautiful.wallpaper then
---     for s = 1, screen.count() do
---         gears.wallpaper.tiled(beautiful.wallpaper, s)
---         -- gears.wallpaper.maximized(beautiful.wallpaper, s, true)
---     end
--- end
-
 -- | Tags | --
 
 tags = {}
@@ -136,6 +127,20 @@ widget_display_l = wibox.widget.imagebox()
 widget_display_l:set_image(beautiful.widget_display_l)
 widget_display_c = wibox.widget.imagebox()
 widget_display_c:set_image(beautiful.widget_display_c)
+
+-- | Redshift | --
+
+myredshift = wibox.widget.imagebox(beautiful.redshift_on)
+lain.widgets.contrib.redshift:attach(
+  myredshift,
+  function ()
+    if lain.widgets.contrib.redshift:is_active() then
+      myredshift:set_image(beautiful.redshift_on)
+    else
+      myredshift:set_image(beautiful.redshift_off)
+    end
+  end
+)
 
 -- | MPD | --
 
@@ -396,7 +401,10 @@ for s = 1, screen.count() do
         right_layout:add(spr5px)
         right_layout:add(mypromptbox[s])
         right_layout:add(wibox.widget.systray())
-        right_layout:add(spr5px)
+        right_layout:add(spr)
+        right_layout:add(widget_display_l)
+        right_layout:add(myredshift)
+        right_layout:add(widget_display_r)
     end
 
     right_layout:add(spr)

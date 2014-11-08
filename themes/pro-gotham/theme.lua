@@ -77,6 +77,12 @@ theme.widget_display_r = theme.icons .. "/panel/widgets/display/widget_display_r
 theme.widget_display_c = theme.icons .. "/panel/widgets/display/widget_display_c.png"
 theme.widget_display_l = theme.icons .. "/panel/widgets/display/widget_display_l.png"
 
+-- | Redshift | --
+
+theme.redshift_on   = theme.icons .. "/panel/widgets/redshift/on.png"
+theme.redshift_off  = theme.icons .. "/panel/widgets/redshift/off.png"
+
+
 -- | MPD | --
 
 theme.mpd_prev  = theme.icons .. "/panel/widgets/mpd/mpd_prev.png"
