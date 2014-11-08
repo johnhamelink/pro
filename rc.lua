@@ -369,16 +369,16 @@ mypromptbox       = {}
 mylayoutbox       = {}
 
 for s = 1, screen.count() do
-   
+
     mypromptbox[s] = awful.widget.prompt()
-    
+
     mylayoutbox[s] = awful.widget.layoutbox(s)
     mylayoutbox[s]:buttons(awful.util.table.join(
                            awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
                            awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
                            awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
-    
+
     mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
 
     mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
@@ -484,8 +484,6 @@ end
 
 root.buttons(awful.util.table.join(
     awful.button({ }, 3, function () mainmenu:toggle() end)
-    -- awful.button({ }, 4, awful.tag.viewnext),
-    -- awful.button({ }, 5, awful.tag.viewprev)
 ))
 
 -- | Key bindings | --
@@ -503,19 +501,6 @@ globalkeys = awful.util.table.join(
             awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
         end),
-    -- awful.key({ modkey,           }, "Tab",
-    --     function ()
-    --         awful.client.focus.history.previous()
-    --         if client.focus then
-    --             client.focus:raise()
-    --         end
-    --     end),
-    -- awful.key({ modkey,         }, "Tab", function(c)
-    --         cyclefocus.cycle(1, {modifier="Super_L"})
-    -- end),
-    -- awful.key({ modkey, "Shift" }, "Tab", function(c)
-    --         cyclefocus.cycle(-1, {modifier="Super_L"})
-    -- end),
 
     awful.key({}, "XF86AudioMute", function() awful.util.spawn("mpc volume 0") end),
     awful.key({}, "XF86AudioLowerVolume", function() awful.util.spawn("mpc volume -20") end),
