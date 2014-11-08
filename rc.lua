@@ -11,7 +11,7 @@ local cyclefocus = require('cyclefocus')
 
 -- | Theme | --
 
-local theme = "pro-dark"
+local theme = "pro-gotham"
 
 beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/" .. theme .. "/theme.lua")
 
