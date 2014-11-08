@@ -640,12 +640,18 @@ awful.rules.rules = {
                      raise = true,
                      keys = clientkeys,
                      buttons = clientbuttons } },
+    { rule = { class = "MPlayer" },
+      properties = { floating = true } },
+    { rule = { class = "pinentry" },
+      properties = { floating = true } },
     { rule = { class = "gcolor2" },
       properties = { floating = true } },
     { rule = { class = "xmag" },
       properties = { floating = true } },
     { rule = { class = "gimp" },
       properties = { floating = true } },
+    { rule = { class = "Xawtv" },
+      properties = { floating = true, ontop = true, opacity = 0.8 } }
 }
 
 -- | Signals | --
