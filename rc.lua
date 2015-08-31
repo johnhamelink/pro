@@ -633,18 +633,38 @@ awful.rules.rules = {
                      raise = true,
                      keys = clientkeys,
                      buttons = clientbuttons } },
-    { rule = { class = "MPlayer" },
+    { rule = { instance = "crx_nckgahadagoaajjgafhacjanaoiihapd" },
+      properties = { floating = true },
+      callback = function(c)
+        awful.titlebar.add(c, { modkey = modkey })
+      end
+    },
+    -- Any of the following should flow
+    { rule = { instance = "chrome_app_list" },
       properties = { floating = true } },
-    { rule = { class = "pinentry" },
+    { rule_any = { class = { "MPlayer", "pinentry", "gcolor2", "xmag", "gimp" } },
       properties = { floating = true } },
-    { rule = { class = "gcolor2" },
-      properties = { floating = true } },
-    { rule = { class = "xmag" },
-      properties = { floating = true } },
-    { rule = { class = "gimp" },
-      properties = { floating = true } },
+    -- Zeal - Set zeal to open in the center of the screen, on top of
+    -- anything else that might be there, and pre-focussed.
+    { rule = { class = "Zeal" },
+      properties = { floating = true, focus = true, ontop = true },
+      callback = function (c)
+        c:geometry({ width = 840, height = 480 })
+        awful.placement.centered(c, nil)
+      end },
+    -- Livecoding.tv - Have chat set at a certain height,
+    -- Sticky to all tags, and translucent.
+    { rule = { name  = "Chat: johnhamelink - Google Chrome" },
+      properties = {
+        floating = true, ontop = true,
+        opacity = 0.8, sticky = true
+      },
+      callback = function(c)
+        c:geometry({ width = 250, height = 400 })
+      end
+    },
     { rule = { class = "Xawtv" },
-      properties = { floating = true, ontop = true, opacity = 0.8 } }
+      properties = { floating = true, ontop = true, opacity = 0.8, sticky = true } }
 }
 
 -- | Signals | --
