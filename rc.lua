@@ -62,7 +62,6 @@ terminal      = "termite"
 tmux          = "termite -e tmux"
 termax        = "termite --geometry 1680x1034+0+22"
 rootterm      = "sudo -i termite"
-ncmpcpp       = "urxvt -geometry 254x60+80+60 -e ncmpcpp"
 browser       = "google-chrome"
 filemanager   = "thunar"
 en_uk         = "setxkbmap -layout 'us,ua' -variant 'winkeys' -option 'grp:caps_toggle,grp_led:caps,compose:menu' &"
@@ -283,6 +282,7 @@ fswidget:set_bgimage(beautiful.widget_display)
 
 net_widgetdl = wibox.widget.textbox()
 net_widgetul = lain.widgets.net({
+    iface = "eth0",
     settings = function()
         widget:set_markup(markup.font("Tamsyn 1", "  ") .. net_now.sent)
         net_widgetdl:set_markup(markup.font("Tamsyn 1", " ") .. net_now.received .. markup.font("Tamsyn 1", " "))
@@ -500,9 +500,11 @@ root.buttons(awful.util.table.join(
 
 -- | Key bindings | --
 
+
 globalkeys = awful.util.table.join(
 
     awful.key({ modkey,           }, "w",      function () mainmenu:show() end),
+    awful.key({ modkey            }, "r",      function () mypromptbox[mouse.screen]:run() end),
     awful.key({ modkey,           }, "j",
         function ()
             awful.client.focus.byidx( 1)
@@ -531,17 +533,14 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "q",      awesome.quit),
     awful.key({ modkey,           }, "Return", function () exec(terminal) end),
     awful.key({ modkey, "Control" }, "Return", function () exec(rootterm) end),
-    awful.key({ modkey,           }, "t",      function () exec(tmux) end),
     awful.key({ modkey,           }, "space",  function () awful.layout.inc(layouts,  1) end),
-    awful.key({ modkey, "Shift"   }, "space",  function () awful.layout.inc(layouts, -1) end),
-    awful.key({ modkey            }, "a",      function () shexec(configuration) end),
-    awful.key({ modkey,           }, "u",      function () exec("urxvt -geometry 254x60+80+60") end),
-    awful.key({ modkey,           }, "s",      function () exec(filemanager) end),
-    awful.key({ modkey            }, "g",      function () exec("gvim") end),
-    awful.key({ modkey, "Control" }, "m",      function () shexec(ncmpcpp) end),
-    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
-    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end)
+    awful.key({ modkey, "Shift"   }, "space",  function () awful.layout.inc(layouts, -1) end)
 )
+
+local wa = screen[mouse.screen].workarea
+ww = wa.width
+wh = wa.height
+ph = 22 -- (panel height)
 
 clientkeys = awful.util.table.join(
     --- Toggle screen focus
@@ -553,14 +552,23 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
-    awful.key({ modkey            }, "Next",   function () awful.client.moveresize( 20,  20, -40, -40) end),
-    awful.key({ modkey            }, "Prior",  function () awful.client.moveresize(-20, -20,  40,  40) end),
-    awful.key({ modkey            }, "Down",   function () awful.client.moveresize(  0,  20,   0,   0) end),
-    awful.key({ modkey            }, "Up",     function () awful.client.moveresize(  0, -20,   0,   0) end),
-    awful.key({ modkey            }, "Left",   function () awful.client.moveresize(-20,   0,   0,   0) end),
-    awful.key({ modkey            }, "Right",  function () awful.client.moveresize( 20,   0,   0,   0) end),
-    awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
-    awful.key({ modkey,           }, "c",      function (c) c:kill()                         end),
+    awful.key({ modkey            }, "Next",     function () awful.client.moveresize( 20,  20, -40, -40) end),
+    awful.key({ modkey            }, "Prior",    function () awful.client.moveresize(-20, -20,  40,  40) end),
+    awful.key({ modkey            }, "Down",     function () awful.client.moveresize(  0,  20,   0,   0) end),
+    awful.key({ modkey            }, "Up",       function () awful.client.moveresize(  0, -20,   0,   0) end),
+    awful.key({ modkey            }, "Left",     function () awful.client.moveresize(-20,   0,   0,   0) end),
+    awful.key({ modkey            }, "Right",    function () awful.client.moveresize( 20,   0,   0,   0) end),
+    awful.key({ modkey, "Control" }, "KP_Left",  function (c) c:geometry( { width = ww / 2, height = wh, x = 0, y = ph } ) end),
+    awful.key({ modkey, "Control" }, "KP_Right", function (c) c:geometry( { width = ww / 2, height = wh, x = ww / 2, y = ph } ) end),
+    awful.key({ modkey, "Control" }, "KP_Up",    function (c) c:geometry( { width = ww, height = wh / 2, x = 0, y = ph } ) end),
+    awful.key({ modkey, "Control" }, "KP_Down",  function (c) c:geometry( { width = ww, height = wh / 2, x = 0, y = wh / 2 + ph } ) end),
+    awful.key({ modkey, "Control" }, "KP_Prior", function (c) c:geometry( { width = ww / 2, height = wh / 2, x = ww / 2, y = ph } ) end),
+    awful.key({ modkey, "Control" }, "KP_Next",  function (c) c:geometry( { width = ww / 2, height = wh / 2, x = ww / 2, y = wh / 2 + ph } ) end),
+    awful.key({ modkey, "Control" }, "KP_Home",  function (c) c:geometry( { width = ww / 2, height = wh / 2, x = 0, y = ph } ) end),
+    awful.key({ modkey, "Control" }, "KP_End",   function (c) c:geometry( { width = ww / 2, height = wh / 2, x = 0, y = wh / 2 + ph } ) end),
+    awful.key({ modkey, "Control" }, "KP_Begin", function (c) c:geometry( { width = ww, height = wh, x = 0, y = ph } ) end),
+    awful.key({ modkey,           }, "f",        function (c) c.fullscreen = not c.fullscreen  end),
+    awful.key({ modkey,           }, "c",        function (c) c:kill() end),
     awful.key({ modkey,           }, "n",
         function (c)
             c.minimized = true
@@ -744,5 +752,3 @@ function run_once(cmd)
 end
 
 -- | Autostart | --
-
-
