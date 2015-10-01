@@ -9,6 +9,7 @@ local naughty    = require("naughty")
 local lain       = require("lain")
 local cyclefocus = require('cyclefocus')
 local menubar    = require("menubar")
+local archmenu   = require("archmenu")
 
 -- | Theme | --
 
@@ -87,18 +88,21 @@ end
 
 -- | Menu | --
 
+regenerate_menu = "xdg_menu --format awesome --root-menu /etc/xdg/menus/arch-applications.menu >~/.config/awesome/archmenu.lua"
+
 menu_main = {
-  { "hibernate", "sudo pm-hibernate" },
-  { "poweroff",  "sudo poweroff"     },
-  { "restart",   awesome.restart     },
-  { "reboot",    "sudo reboot"       },
-  { "quit",      awesome.quit        }}
+  { "Hibernate", "sudo pm-hibernate" },
+  { "Poweroff",  "sudo poweroff"     },
+  { "Restart",   awesome.restart     },
+  { "Reboot",    "sudo reboot"       },
+  { "Quit",      awesome.quit        },
+  { "Regnerate Menu", regenerate_menu }}
 
 mainmenu = awful.menu({ items = {
-  { " awesome",       menu_main   },
-  { " file manager",  filemanager },
-  { " root terminal", rootterm    },
-  { " user terminal", terminal    }}})
+  { " Awesome",       menu_main   },
+  { " Applications",  xdgmenu    },
+  { " File Manager",  filemanager },
+  { " User Terminal", terminal    }}})
 
 -- | Markup | --
 
